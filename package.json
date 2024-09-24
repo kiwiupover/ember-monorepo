@@ -25,5 +25,8 @@
   "volta": {
     "node": "20.17.0",
     "pnpm": "9.8.0"
+  },
+  "resolutions": {
+    "ember-eslint-parser": "^0.5.1"
   }
 }

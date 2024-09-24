@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Default",
+  "compilerOptions": {
+    // Path resolution
+    "baseUrl": ".",
+    "moduleResolution": "bundler",
+    // We only use tsc for type checking
+    "declaration": true,
+    "noEmit": true,
+    // Build settings
+    "module": "ESNext",
+    "target": "ESNext",
+    "composite": true,
+    // Features
+    "allowJs": true,
+    "checkJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    // Strictness / Correctness
+    "strict": true
+  }
+}

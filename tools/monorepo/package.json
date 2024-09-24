@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@repo/addon-updates": "workspace:*",
+    "@repo/update-project": "workspace:*",
     "@repo/app-updates": "workspace:*",
     "execa": "^9.3.1",
     "ember-apply": "^2.12.0"

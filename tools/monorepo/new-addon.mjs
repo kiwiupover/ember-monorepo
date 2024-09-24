@@ -1,7 +1,7 @@
 import { execa } from "execa";
 import path from "path";
 
-import { updateAddon, cleanUp } from "@repo/addon-updates";
+import { updateAddon, cleanUp } from "@repo/update-project";
 
 export async function generateAddon(info) {
   const { root, packageName, addonLocation, testAppLocation } = info;
@@ -51,7 +51,7 @@ export async function generateAddon(info) {
   console.log("Addon generated successfully");
 }
 
-export async function updateAddon(info) {
+export async function updateNewAddon(info) {
   await updateAddon(info);
 }
 
@@ -74,7 +74,7 @@ if (import.meta.url === `file://${process.argv[1]}` && process.argv[2]) {
   await generateAddon(newAddonObject);
   console.log("Addon generated successfully");
 
-  await updateAddon(newAddonObject);
+  await updateNewAddon(newAddonObject);
   console.log("Addon updated successfully");
 
   await execa("pnpm", ["install"], { cwd: newAddonObject.root });
