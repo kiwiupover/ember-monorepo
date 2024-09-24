@@ -1,0 +1,16 @@
+{
+  "name": "@repo/prettier-config",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "prettier": "^3.3.3",
+    "prettier-plugin-ember-template-tag": "2.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "volta": {
+    "extends": "../../package.json"
+  }
+}

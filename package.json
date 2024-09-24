@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "concurrently 'pnpm:dev:*'",
+    "dev:turbo": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,js,hbs,gts,gjs,html,md}\"",
+    "new:app": "node tools/monorepo/new-app.mjs",
+    "new:addon": "node tools/monorepo/new-addon.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "turbo": "^2.1.2"
+  },
+  "packageManager": "pnpm@8.15.6",
+  "name": "tui-project",
+  "engines": {
+    "node": "20.17.0",
+    "npm": "Use pnpm",
+    "yarn": "Use pnpm"
+  },
+  "volta": {
+    "node": "20.17.0",
+    "pnpm": "9.8.0"
+  }
+}
