@@ -11,8 +11,6 @@
   },
   "devDependencies": {
     "@repo/prettier-config": "workspace:*",
-    "@repo/eslint-config": "workspace:*",
-    "prettier-plugin-ember-template-tag": "^2.0.2",
     "concurrently": "^8.2.2",
     "eslint": "^8.57.0",
     "prettier": "^3.3.3",
