@@ -1,5 +1,5 @@
-import path from "path";
-import { files } from "ember-apply";
+import path from 'path';
+import { files } from 'ember-apply';
 
 /**
  * We only need to lint in the new locations
@@ -7,8 +7,8 @@ import { files } from "ember-apply";
  */
 export async function copyConfigFiles({ dirname, location }) {
   // Copy the new eslint files
-  await files.copyFileTo(path.join(location, ".eslintrc.cjs"), {
-    source: path.join(dirname, "files/app/.eslintrc.cjs"),
+  await files.copyFileTo(path.join(location, '.eslintrc.cjs'), {
+    source: path.join(dirname, 'files/app/.eslintrc.cjs'),
   });
 
   // Copy the new tsconfig.json

@@ -1,12 +1,12 @@
-import path from "node:path";
-import url from "node:url";
-import { promises as fs } from "node:fs";
+import path from 'node:path';
+import url from 'node:url';
+import { promises as fs } from 'node:fs';
 
-import { cleanUpLint } from "./clean-up-lints.js";
-import { scopedCss } from "./scoped-css.js";
-import { copyConfigFiles } from "./copy-config-files.js";
+import { cleanUpLint } from './clean-up-lints.js';
+import { scopedCss } from './scoped-css.js';
+import { copyConfigFiles } from './copy-config-files.js';
 
-import { packageJson, files } from "ember-apply";
+import { packageJson, files } from 'ember-apply';
 
 /**
  * @param {string} file
@@ -14,9 +14,9 @@ import { packageJson, files } from "ember-apply";
 async function deleteFile(file) {
   try {
     await fs.unlink(file);
-    console.log("File deleted successfully");
+    console.log('File deleted successfully');
   } catch (err) {
-    console.error("Error deleting the file:", err);
+    console.error('Error deleting the file:', err);
   }
 }
 
@@ -34,7 +34,7 @@ export async function updateApp(info) {
   debugger;
 
   await packageJson.modify((packageJson) => {
-    if (name.startsWith("@repo/")) {
+    if (name.startsWith('@repo/')) {
       return;
     }
 
@@ -44,29 +44,26 @@ export async function updateApp(info) {
   // update the package.json to include the new dependencies
   await packageJson.addDevDependencies(
     {
-      "@repo/eslint-config": "workspace:*",
-      "@repo/prettier-config": "workspace:*",
-      "@repo/typescript-config": "workspace:*",
-      "ember-scoped-css": "0.21.4",
-      "ember-route-template": "^1.0.3",
-      "ember-template-imports": "^4.1.1",
-      "prettier-plugin-ember-template-tag": "^2.0.2",
+      '@repo/eslint-config': 'workspace:*',
+      '@repo/prettier-config': 'workspace:*',
+      '@repo/typescript-config': 'workspace:*',
+      'ember-scoped-css': '0.21.4',
+      'ember-route-template': '^1.0.3',
+      'ember-template-imports': '^4.1.1',
+      'prettier-plugin-ember-template-tag': '^2.0.2',
     },
-    appLocation
+    appLocation,
   );
 
   // Update app with componet files that use `gts` files
-  await files.applyFolder(
-    path.join(__dirname, "files/app/components"),
-    path.join(appLocation, "app/components")
-  );
+  await files.applyFolder(path.join(__dirname, 'files/app/components'), path.join(appLocation, 'app/components'));
 
   // Add the new scripts to the app to run build.
   await packageJson.addScripts(
     {
       dev: "concurrently 'pnpm:start:*'",
     },
-    appLocation
+    appLocation,
   );
 
   /**
@@ -78,13 +75,10 @@ export async function updateApp(info) {
   // await scopedCss(appLocation);
 
   // Update test app files that use `gts` files
-  await files.applyFolder(
-    path.join(__dirname, "files/templates"),
-    path.join(appLocation, "app/templates")
-  );
+  await files.applyFolder(path.join(__dirname, 'files/templates'), path.join(appLocation, 'app/templates'));
 
   // Remove the application.hbs file
-  await deleteFile(path.join(appLocation, "app/templates/application.hbs"));
+  await deleteFile(path.join(appLocation, 'app/templates/application.hbs'));
 }
 
 /**

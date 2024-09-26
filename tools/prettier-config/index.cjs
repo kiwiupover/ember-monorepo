@@ -1,58 +1,67 @@
-'use strict';
+"use strict";
 
 module.exports = {
-  plugins: ['prettier-plugin-ember-template-tag'],
+  plugins: ["prettier-plugin-ember-template-tag"],
   singleQuote: true,
   printWidth: 120,
-  quoteProps: 'consistent',
+  quoteProps: "consistent",
   bracketSpacing: true,
-  arrowParens: 'always',
+  arrowParens: "always",
   useTabs: false,
   overrides: [
     {
-      files: ['*.js', '*.ts', '*.cjs', '*.mjs', '*.cts', '*.mts', '*.gjs', '*.gts'],
+      files: [
+        "*.js",
+        "*.ts",
+        "*.cjs",
+        "*.mjs",
+        "*.cts",
+        "*.mts",
+        "*.gjs",
+        "*.gts",
+      ],
       options: {
-        trailingComma: 'all',
+        trailingComma: "all",
       },
     },
     {
-      files: '*.json',
+      files: "*.json",
       options: {
         useTabs: false,
       },
     },
     {
-      files: '*.yml',
+      files: "*.yml",
       options: {
         useTabs: false,
       },
     },
     {
-      files: '*.hbs',
+      files: "*.hbs",
       options: {
         printWidth: 80,
         singleQuote: false,
-        parser: 'glimmer',
+        parser: "glimmer",
       },
     },
     {
-      files: '*.css',
+      files: "*.css",
       options: {
         printWidth: 80,
         singleQuote: false,
-        parser: 'css',
+        parser: "css",
       },
     },
     {
-      files: '*.svg',
+      files: "*.svg",
       options: {
         printWidth: 80,
         singleQuote: false,
-        parser: 'html',
+        parser: "html",
       },
     },
     {
-      files: ['*.gjs', '*.gts'],
+      files: ["*.gjs", "*.gts"],
       options: {
         templateSingleQuote: false,
       },

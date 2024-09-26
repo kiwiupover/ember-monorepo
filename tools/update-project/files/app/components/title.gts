@@ -8,7 +8,7 @@ export interface TitleSignature {
 }
 
 export const Title: TOC<TitleSignature> = <template>
-  <h2 class='title' ...attributes>
+  <h2 class="title" ...attributes>
     {{@title}}
   </h2>
   A title

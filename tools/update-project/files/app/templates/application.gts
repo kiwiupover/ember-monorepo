@@ -7,5 +7,5 @@ export default RouteTemplate(
     <h2 class="title">Test app for your new addon</h2>
     <Title @title="Welcome to the test app" />
     {{outlet}}
-  </template>
+  </template>,
 );

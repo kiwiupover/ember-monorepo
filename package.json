@@ -6,24 +6,27 @@
     "dev:turbo": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,js,hbs,gts,gjs,html,md}\"",
-    "new:app": "node tools/monorepo/new-app.mjs",
-    "new:addon": "node tools/monorepo/new-addon.mjs"
+    "new:app": "node --experimental-strip-types tools/monorepo/new-app.mjs",
+    "new:addon": "node --experimental-strip-types tools/monorepo/new-addon.mjs"
   },
   "devDependencies": {
+    "@repo/prettier-config": "workspace:*",
+    "@repo/eslint-config": "workspace:*",
+    "prettier-plugin-ember-template-tag": "^2.0.2",
     "concurrently": "^8.2.2",
     "eslint": "^8.57.0",
-    "prettier": "^3.2.5",
+    "prettier": "^3.3.3",
     "turbo": "^2.1.2"
   },
   "packageManager": "pnpm@8.15.6",
-  "name": "tui-project",
+  "name": "project",
   "engines": {
-    "node": "20.17.0",
+    "node": "22.9.0",
     "npm": "Use pnpm",
     "yarn": "Use pnpm"
   },
   "volta": {
-    "node": "20.17.0",
+    "node": "22.9.0",
     "pnpm": "9.8.0"
   },
   "resolutions": {

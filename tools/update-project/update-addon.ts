@@ -1,17 +1,21 @@
-import path from "node:path";
-import url from "node:url";
+import path from 'node:path';
+import url from 'node:url';
 
-import { scopedCssVite, scopedCssEmberCli } from "./scoped-css.js";
-import { copyConfigFiles } from "./copy-config-files.js";
-import { deleteFile } from "./delete-file.js";
+import { scopedCssVite, scopedCssEmberCli } from './scoped-css.js';
+import { copyConfigFiles } from './copy-config-files.js';
+import { deleteFile } from './delete-file.js';
 
-import { packageJson, files } from "ember-apply";
+import { packageJson, files } from 'ember-apply';
 
-/**
- * @param {{ addonLocation: string; packageName: string, root?: string; testAppLocation: string; }} info
- */
-export async function updateNewAddon(info) {
-  const { root, addonLocation, packageName, testAppLocation } = info;
+export interface AddonInfo {
+  root: string;
+  addonLocation: string;
+  packageName: string;
+  testAppLocation: string;
+}
+
+export async function updateNewAddon(info: AddonInfo): Promise<void> {
+  const { addonLocation, packageName, testAppLocation } = info;
 
   // Update the addon
 
@@ -19,7 +23,7 @@ export async function updateNewAddon(info) {
   const { name } = await packageJson.read(addonLocation);
 
   await packageJson.modify((packageJson) => {
-    if (name.startsWith("@repo/")) {
+    if (name.startsWith('@repo/')) {
       return;
     }
 
@@ -29,28 +33,25 @@ export async function updateNewAddon(info) {
   // update the package.json to include the new dependencies
   await packageJson.addDevDependencies(
     {
-      "@repo/eslint-config": "workspace:*",
-      "@repo/prettier-config": "workspace:*",
-      "@repo/typescript-config": "workspace:*",
-      "eslint-plugin-ember": "^12.2.0",
-      "ember-template-imports": "^4.1.1",
-      "prettier-plugin-ember-template-tag": "^2.0.2",
+      '@repo/eslint-config': 'workspace:*',
+      '@repo/prettier-config': 'workspace:*',
+      '@repo/typescript-config': 'workspace:*',
+      'eslint-plugin-ember': '^12.2.0',
+      'ember-template-imports': '^4.1.1',
+      'prettier-plugin-ember-template-tag': '^2.0.2',
     },
-    addonLocation
+    addonLocation,
   );
 
   // Update addon with componet files that use `gts` files
-  await files.applyFolder(
-    path.join(__dirname, "files/addon/components"),
-    path.join(addonLocation, "src/components")
-  );
+  await files.applyFolder(path.join(__dirname, 'files/addon/components'), path.join(addonLocation, 'src/components'));
 
   // Add the new scripts to the addon to run build.
   await packageJson.addScripts(
     {
       dev: "concurrently 'pnpm:start:*'",
     },
-    addonLocation
+    addonLocation,
   );
 
   /**
@@ -70,18 +71,15 @@ export async function updateNewAddon(info) {
   await packageJson.modify((packageJson) => {
     packageJson.dependencies = {
       ...dependencies,
-      [`@repo/${packageName}`]: "workspace:*",
+      [`@repo/${packageName}`]: 'workspace:*',
     };
   }, testAppLocation);
 
   // Update test app files that use `gts` files
-  await files.applyFolder(
-    path.join(__dirname, "files/templates"),
-    path.join(testAppLocation, "app/templates")
-  );
+  await files.applyFolder(path.join(__dirname, 'files/templates'), path.join(testAppLocation, 'app/templates'));
 
   // Remove the application.hbs file
-  await deleteFile(path.join(testAppLocation, "app/templates/application.hbs"));
+  await deleteFile(path.join(testAppLocation, 'app/templates/application.hbs'));
 
   // Remove the `"name": "workspace: *"` from the package.json
   await packageJson.removeDevDependencies([packageName], testAppLocation);
@@ -89,24 +87,23 @@ export async function updateNewAddon(info) {
   // Add the new dependencies to the test app
   await packageJson.addDevDependencies(
     {
-      "eslint-plugin-ember": "^12.2.0",
-      "ember-route-template": "^1.0.3",
-      "ember-template-imports": "^4.1.1",
-      "prettier-plugin-ember-template-tag": "^2.0.2",
+      'eslint-plugin-ember': '^12.2.0',
+      'ember-route-template': '^1.0.3',
+      'ember-template-imports': '^4.1.1',
+      'prettier-plugin-ember-template-tag': '^2.0.2',
     },
-    testAppLocation
+    testAppLocation,
   );
 
   // Add the new scripts to the test app to run the addon
   await packageJson.addScripts(
     {
-      dev: "ember serve",
+      dev: 'ember serve',
     },
-    testAppLocation
+    testAppLocation,
   );
 }
 
-// @ts-ignore
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
-updateAddon.path = __dirname;
+updateNewAddon.path = __dirname;

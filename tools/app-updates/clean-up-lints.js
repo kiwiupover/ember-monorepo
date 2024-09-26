@@ -1,4 +1,4 @@
-import { execa } from "execa";
+import { execa } from 'execa';
 
 /**
  * @param {string} location
@@ -12,7 +12,7 @@ export async function cleanUpLint(location) {
   //   may reveal our lint + prettier configs
   //   may have a disagreement
   //   (or a bug in the jsonc/sort-keys fixer)
-  await execa("pnpm", ["lint:fix"], { cwd: location });
+  await execa('pnpm', ['lint:fix'], { cwd: location });
 }
 
 /**
@@ -20,6 +20,6 @@ export async function cleanUpLint(location) {
  */
 async function lintIgnoringErrors(cwd) {
   try {
-    await execa("pnpm", ["lint:fix"], { cwd });
+    await execa('pnpm', ['lint:fix'], { cwd });
   } catch {}
 }
