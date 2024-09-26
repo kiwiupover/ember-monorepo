@@ -25,26 +25,6 @@ module.exports = {
       },
     },
     {
-      files: "*.json",
-      options: {
-        useTabs: false,
-      },
-    },
-    {
-      files: "*.yml",
-      options: {
-        useTabs: false,
-      },
-    },
-    {
-      files: "*.hbs",
-      options: {
-        printWidth: 80,
-        singleQuote: false,
-        parser: "glimmer",
-      },
-    },
-    {
       files: "*.css",
       options: {
         printWidth: 80,
