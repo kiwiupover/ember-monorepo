@@ -6,8 +6,8 @@
     "dev:turbo": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,js,hbs,gts,gjs,html,md}\"",
-    "new:app": "node --experimental-strip-types tools/monorepo/new-app.mjs",
-    "new:addon": "node --experimental-strip-types tools/monorepo/new-addon.mjs"
+    "new:app": "node --experimental-strip-types tools/monorepo/new-app.ts",
+    "new:addon": "node --experimental-strip-types tools/monorepo/new-addon.mts"
   },
   "devDependencies": {
     "@repo/prettier-config": "workspace:*",
