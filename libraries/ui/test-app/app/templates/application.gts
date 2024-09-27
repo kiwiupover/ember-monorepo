@@ -1,6 +1,6 @@
 import RouteTemplate from 'ember-route-template';
 
-import Title from '@repo/REPLACE_WITH_PACKAGE_NAME/title';
+import Title from '@repo/ui/components/title';
 
 export default RouteTemplate(
   <template>

@@ -79,7 +79,7 @@ if (import.meta.url === `file://${process.argv[1]}` && process.argv[2]) {
   console.log('Addon updated successfully');
 
   await execa('pnpm', ['install'], { cwd: newAddonObject.root });
-  console.log('pnpm install has run successfully');
+  console.log('Update dependancies pnpm install has run successfully');
 
   //TODO: we need to fix linting first
   await cleanUp(newAddonObject.addonLocation);

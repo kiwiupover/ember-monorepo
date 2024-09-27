@@ -2,8 +2,9 @@ import path from 'node:path';
 import url from 'node:url';
 
 import { scopedCssVite, scopedCssEmberCli } from './scoped-css.ts';
-import { copyConfigAddonFiles, copyConfigAddonTestFiles } from './copy-config-files.ts';
+import { copyFile } from './copy-config-files.ts';
 import { deleteFile } from './delete-file.ts';
+import { updateImportPackageName } from './update-imports-with-package-name.ts';
 
 import { packageJson, files } from 'ember-apply';
 
@@ -57,15 +58,29 @@ export async function updateNewAddon(info: AddonInfo): Promise<void> {
   );
 
   /**
-   * Copy the eslint and tsconfig to the addonLocation
+   * Copy the eslint to the addonLocation
    * This will overwrite the existing files
    */
-  await copyConfigAddonFiles({ dirname: __dirname, location: addonLocation });
+  await copyFile({
+    dirname: __dirname,
+    location: addonLocation,
+    fileName: '.eslintrc.cjs',
+    sourcefile: 'files/addon/.eslintrc.cjs',
+  });
+
+  await copyFile({
+    dirname: __dirname,
+    location: addonLocation,
+    fileName: '.gitignore',
+    sourcefile: 'files/addon/.gitignore',
+  });
 
   await scopedCssVite(addonLocation);
 
   // Remove the existing prettier file from the addon
   await deleteFile(path.join(addonLocation, '.prettierrc.cjs'));
+
+  await updateImportPackageName(addonLocation, packageName);
 
   // Update the test app
   await scopedCssEmberCli(testAppLocation);
@@ -105,9 +120,20 @@ export async function updateNewAddon(info: AddonInfo): Promise<void> {
     testAppLocation,
   );
 
-  await copyConfigAddonTestFiles({ dirname: __dirname, location: testAppLocation });
+  // Copy the new eslint files to the test app
+  await copyFile({
+    dirname: __dirname,
+    location: testAppLocation,
+    fileName: '.eslintrc.cjs',
+    sourcefile: 'files/addon-test/.eslintrc.cjs',
+  });
+
+  // Remove the existing eslint and prettier files from the test app
   await deleteFile(path.join(testAppLocation, '.eslintrc.js'));
   await deleteFile(path.join(testAppLocation, '.prettierrc.js'));
+
+  // Update imports with the new package name
+  await updateImportPackageName(path.join(testAppLocation, 'app'), packageName);
 
   // Add the new scripts to the test app to run the addon
   await packageJson.addScripts(

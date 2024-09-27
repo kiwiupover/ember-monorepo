@@ -102,6 +102,6 @@ export async function scopedCssEmberCli(location: string) {
 }
 
 // @ts-ignore
-// const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
-// scopedCssVite.path = __dirname;
+scopedCssVite.path = __dirname;
