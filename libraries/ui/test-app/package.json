@@ -24,7 +24,7 @@
     "start": "ember serve",
     "test": "concurrently \"pnpm:lint\" \"pnpm:test:*\" --names \"lint,test:\"",
     "test:ember": "ember test",
-    "dev": "ember serve"
+    "dev": "ember serve --port=4444"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

@@ -4,7 +4,6 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 export async function installTailwindCss(location: string): Promise<void> {
-  console.log({ location });
   await packageJson.addDevDependencies(
     {
       'tailwindcss': 'latest',
@@ -25,6 +24,13 @@ export async function installTailwindCss(location: string): Promise<void> {
     location,
     fileName: `app/styles/tailwind.css`,
     sourcefile: 'files/tailwindcss/tailwind.css',
+  });
+
+  await copyFile({
+    dirname: __dirname,
+    location,
+    fileName: `.gitignore`,
+    sourcefile: 'files/tailwindcss/.gitignore',
   });
 
   await html.insertText(`${location}/app/index.html`, {
@@ -58,8 +64,6 @@ export async function installTailwindCss(location: string): Promise<void> {
     },
     location,
   );
-
-  await project.gitIgnore('public/assets/tailwind.css', '# compiled output');
 }
 
 const __dirname = dirname(fileURLToPath(import.meta.url));

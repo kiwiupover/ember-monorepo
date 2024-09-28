@@ -2,6 +2,20 @@
 
 This is a starter monorepo for projects using ember.
 
+## Adding a new app
+
+Run the following command:
+
+```sh
+pnpm new:app <APP-NAME>
+```
+
+### A new app with tailwindcss
+
+```sh
+pnpm new:app <APP-NAME> --tailwind
+```
+
 ## Adding a new addon
 
 Run the following command:

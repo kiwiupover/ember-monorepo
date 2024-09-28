@@ -5,4 +5,6 @@
   margin-bottom: 1rem;
   margin-top: 1rem;
   text-align: center;
+  border: 2px solid #c3570f;
+  border-radius: 0.5rem;
 }
