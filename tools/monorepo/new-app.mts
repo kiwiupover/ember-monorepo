@@ -3,7 +3,7 @@ import { execa } from 'execa';
 import path from 'path';
 import * as changeCase from 'change-case';
 
-const { updateApp, cleanUp, moveApp } = await import('@repo/update-project/src/index.ts');
+const { updateApp, cleanUp, moveApp, installTailwind } = await import('@repo/update-project/src/index.ts');
 
 const appFolder = 'apps';
 
@@ -66,19 +66,23 @@ if (import.meta.url === `file://${process.argv[1]}` && process.argv[2]) {
   let appName = process.argv[2];
   let location = process.argv[2];
 
+  const hasTailwind = process.argv[3] === '--tailwind';
+
   if (!location.startsWith('@repo/')) {
     location = `repo-${location}`;
     appName = `@repo/${appName}`;
   }
 
   location = changeCase.kebabCase(location);
-  const appDestination = location.replace('repo-', '');
+  const root = process.cwd();
+  const appDestination = path.join(`${appFolder}/${location.replace('repo-', '')}`);
+  const appLocation = path.join(`${appFolder}/${location}`);
 
   const newAppObject = {
-    root: process.cwd(),
+    root,
     appName,
-    appLocation: path.join(`${appFolder}/${location}`),
-    appDestination: path.join(`${appFolder}/${appDestination}`),
+    appLocation,
+    appDestination,
   };
 
   console.log('Starting generation of the new app', newAppObject);
@@ -89,13 +93,18 @@ if (import.meta.url === `file://${process.argv[1]}` && process.argv[2]) {
   await updateNewApp(newAppObject);
   console.log('App updated successfully');
 
-  await execa('pnpm', ['install'], { cwd: newAppObject.root });
+  await execa('pnpm', ['install'], { cwd: root });
   console.log('Update dependancies pnpm install has run successfully');
 
-  await cleanUp(newAppObject.appLocation);
+  await cleanUp(appLocation);
   console.log('Clean up has run successfully');
 
-  await moveApp(newAppObject.appLocation, newAppObject.appDestination);
+  if (hasTailwind) {
+    await installTailwind(appLocation);
+    console.log('Installed tailwind css successfully');
+  }
+
+  await moveApp(appLocation, appDestination);
   console.log('Move app has run successfully');
 
   process.exit(0);

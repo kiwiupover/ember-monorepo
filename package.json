@@ -11,9 +11,11 @@
   },
   "devDependencies": {
     "@repo/prettier-config": "workspace:*",
+    "@tailwindcss/forms": "latest",
     "concurrently": "^8.2.2",
     "eslint": "^8.57.0",
     "prettier": "^3.3.3",
+    "tailwindcss": "latest",
     "turbo": "^2.1.2"
   },
   "packageManager": "pnpm@8.15.6",

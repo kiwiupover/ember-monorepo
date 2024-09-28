@@ -1,0 +1,66 @@
+import { packageJson, project, html } from 'ember-apply';
+import { copyFile } from './copy-config-files.ts';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+export async function installTailwindCss(location: string): Promise<void> {
+  console.log({ location });
+  await packageJson.addDevDependencies(
+    {
+      'tailwindcss': 'latest',
+      '@tailwindcss/forms': 'latest',
+    },
+    location,
+  );
+
+  await copyFile({
+    dirname: __dirname,
+    location,
+    fileName: 'tailwind.config.cjs',
+    sourcefile: 'files/tailwindcss/tailwind.config.cjs',
+  });
+
+  await copyFile({
+    dirname: __dirname,
+    location,
+    fileName: `app/styles/tailwind.css`,
+    sourcefile: 'files/tailwindcss/tailwind.css',
+  });
+
+  await html.insertText(`${location}/app/index.html`, {
+    text: `<link integrity="" rel="stylesheet" href="{{rootURL}}assets/tailwind.css">\n`,
+    beforeFirst: 'link',
+  });
+
+  await html.insertText(`${location}/app/index.html`, {
+    text: `<link rel="stylesheet" href="{{rootURL}}assets/tailwind.css">\n`,
+    beforeFirst: 'link',
+  });
+
+  await packageJson.addScripts(
+    {
+      'tailwind:build':
+        'npx tailwindcss' +
+        ' -c ./tailwind.config.cjs' +
+        ' -i ./app/styles/tailwind.css' +
+        ' -o ./public/assets/tailwind.css',
+      'tailwind:watch':
+        'npx tailwindcss' +
+        ' -c ./tailwind.config.cjs' +
+        ' -i ./app/styles/tailwind.css' +
+        ' -o ./public/assets/tailwind.css' +
+        ' --watch',
+
+      'dev': "concurrently 'npm:start:ember' 'npm:tailwind:watch' --names 'serve,styles'",
+      'start': "concurrently 'npm:start:ember' 'npm:tailwind:watch' --names 'serve,styles'",
+      'start:ember': 'ember serve',
+      'build': 'npm run tailwind:build && ember build --environment=production',
+    },
+    location,
+  );
+
+  await project.gitIgnore('public/assets/tailwind.css', '# compiled output');
+}
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+installTailwindCss.path = __dirname;

@@ -2,6 +2,7 @@ import { cleanUpLint } from './clean-up-lints.ts';
 import { updateNewApp } from './update-new-app.ts';
 import { updateNewAddon } from './update-new-addon.ts';
 import { moveGenerateApp } from './move-generate-app.ts';
+import { installTailwindCss } from './install-tailwindcss.ts';
 
 import type { AppInfo } from './update-new-app.ts';
 import type { AddonInfo } from './update-new-addon.ts';
@@ -20,4 +21,8 @@ export async function cleanUp(location: string) {
 
 export async function moveApp(location: string, newLocation: string) {
   await moveGenerateApp(location, newLocation);
+}
+
+export async function installTailwind(location: string) {
+  await installTailwindCss(location);
 }
