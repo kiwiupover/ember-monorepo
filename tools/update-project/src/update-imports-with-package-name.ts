@@ -39,7 +39,8 @@ async function processDirectory(directory: string, packageName: string, depth: n
       } else if (entry.isFile() && path.extname(entry.name) === '.gts') {
         try {
           const data = await fs.readFile(fullPath, 'utf8');
-          const result = data.replace(/@repo\/REPLACE_WITH_PACKAGE_NAME/g, `@repo/${packageName}`);
+          const newPackageName = packageName.startsWith('@repo/') ? packageName : `@repo/${packageName}`;
+          const result = data.replace(/@repo\/REPLACE_WITH_PACKAGE_NAME/g, newPackageName);
           await fs.writeFile(fullPath, result, 'utf8');
           console.log(`Updated file: ${fullPath}`);
         } catch (err) {
