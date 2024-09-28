@@ -1,14 +1,15 @@
+import type { AppInfo } from '@repo/update-project/src/update-new-app.ts';
 import { execa } from 'execa';
 import path from 'path';
 
-import { updateApp, cleanUp } from '@repo/app-updates';
+const { updateApp, cleanUp } = await import('@repo/update-project/src/index.ts');
 
 const appLocation = 'apps';
 
-export async function generateApp(info) {
+export async function generateApp(info: AppInfo) {
   const { root, appName } = info;
 
-  if (!root || !appName) {
+  if (!appName) {
     throw new Error('Please provide a packagName required arguments');
   }
 
@@ -22,8 +23,8 @@ export async function generateApp(info) {
       appName,
 
       // the v2 app blueprint
-      '--blueprint',
-      '@embroider/app-blueprint',
+      // '--blueprint',
+      // 'app-blueprint-kiwiupover',
 
       // don't install dependencies
       '--skip-npm',
@@ -34,7 +35,11 @@ export async function generateApp(info) {
       // use pnpm
       '--pnpm',
 
+      // use embroider
+      '--embroider',
+
       // use typescript
+      // TODO update when typescript is ready.
       '--typescript',
     ],
     {
@@ -44,11 +49,9 @@ export async function generateApp(info) {
       },
     },
   );
-
-  console.log('App generated successfully');
 }
 
-export async function updateNewApp(info) {
+export async function updateNewApp(info: AppInfo) {
   await updateApp(info);
 }
 
@@ -65,8 +68,6 @@ if (import.meta.url === `file://${process.argv[1]}` && process.argv[2]) {
     appLocation: path.join(`${appLocation}/${process.argv[2]}`),
   };
 
-  debugger;
-
   console.log('Starting generation of the new app', newAppObject);
 
   await generateApp(newAppObject);
@@ -78,7 +79,6 @@ if (import.meta.url === `file://${process.argv[1]}` && process.argv[2]) {
   await execa('pnpm', ['install'], { cwd: newAppObject.root });
   console.log('Update dependancies pnpm install has run successfully');
 
-  //TODO: we need to fix linting first
   await cleanUp(newAppObject.appLocation);
   console.log('Clean up has run successfully');
 

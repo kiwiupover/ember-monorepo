@@ -1,4 +1,4 @@
-import type { AddonInfo } from '@repo/update-project/src/update-addon.ts';
+import type { AddonInfo } from '@repo/update-project/src/update-new-addon.ts';
 import { execa } from 'execa';
 import path from 'node:path';
 
@@ -81,7 +81,6 @@ if (import.meta.url === `file://${process.argv[1]}` && process.argv[2]) {
   await execa('pnpm', ['install'], { cwd: newAddonObject.root });
   console.log('Update dependancies pnpm install has run successfully');
 
-  //TODO: we need to fix linting first
   await cleanUp(newAddonObject.addonLocation);
   await cleanUp(newAddonObject.testAppLocation);
 

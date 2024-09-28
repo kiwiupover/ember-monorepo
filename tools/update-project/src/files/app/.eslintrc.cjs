@@ -1,5 +1,5 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
   root: true,
-  extends: ["@repo/eslint-config/ember-app.cjs"],
+  extends: ['@repo/eslint-config/ember-app-ts.cjs'],
 };
