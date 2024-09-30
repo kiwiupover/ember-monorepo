@@ -8,6 +8,7 @@ export async function installTailwindCss(location: string): Promise<void> {
     {
       'tailwindcss': 'latest',
       '@tailwindcss/forms': 'latest',
+      'stylelint-config-tailwindcss': 'latest',
     },
     location,
   );
@@ -31,6 +32,13 @@ export async function installTailwindCss(location: string): Promise<void> {
     location,
     fileName: `.gitignore`,
     sourcefile: 'files/tailwindcss/.gitignore',
+  });
+
+  await copyFile({
+    dirname: __dirname,
+    location,
+    fileName: `.stylelintrc.js`,
+    sourcefile: 'files/tailwindcss/.stylelintrc.js',
   });
 
   await html.insertText(`${location}/app/index.html`, {
