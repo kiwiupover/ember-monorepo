@@ -1,4 +1,7 @@
 import type { TOC } from '@ember/component/template-only';
+import { service } from '@ember/service';
+
+import { banner } from '@repo/ui/components/banner';
 
 export interface TitleSignature {
   Element: HTMLElement;
