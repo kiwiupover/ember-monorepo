@@ -1,17 +1,26 @@
 'use strict';
 
+const { sortGroups } = require('./sort-order.cjs');
+
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
   },
-  plugins: ['ember', '@typescript-eslint'],
+  plugins: ['ember', '@typescript-eslint', 'simple-import-sort'],
   extends: ['eslint:recommended', 'plugin:ember/recommended', 'plugin:prettier/recommended'],
   env: {
     browser: true,
   },
-  rules: {},
+  rules: {
+    'simple-import-sort/imports': [
+      'error',
+      {
+        groups: sortGroups,
+      },
+    ],
+  },
   overrides: [
     {
       files: ['**/*.{js,ts}'],
