@@ -6,7 +6,6 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "lint": "eslint . --ext .ts",
     "clean": "rm -rf dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,16 +16,19 @@
     "ember-source": "^3.28.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.12.0",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@tsconfig/node22": "^22.0.0",
     "@types/jscodeshift": "^0.11.11",
-    "@types/node": "^22.7.2",
+    "@types/node": "^22.7.4",
     "ember-apply": "^2.12.0",
-    "execa": "^9.3.1",
+    "eslint": "^9.12.0",
+    "execa": "^9.4.0",
+    "globals": "^15.10.0",
     "jscodeshift": "^17.0.0",
-    "tsup": "^8.3.0",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.8.0"
   },
   "volta": {
     "extends": "../../package.json"
