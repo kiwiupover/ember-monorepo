@@ -23,63 +23,6 @@ function camelize(str, { firstUpper } = {}) {
 }
 
 const TYPES = {
-  // model: {
-  //   fileType: "model",
-  //   entryKeys(name) {
-  //     return [name];
-  //   },
-  //   keysOnly: true,
-  // },
-  // adapter: {
-  // 	fileType: 'adapter',
-  // 	entryKeys(name) {
-  // 		return [name];
-  // 	},
-  // 	fallbackImport: 'adapters/application',
-  // },
-  // serializer: {
-  //   fileType: "serializer",
-  //   entryKeys(name) {
-  //     return [name];
-  //   },
-  //   fallbackImport: "@ember-data/serializer",
-  // },
-  // transform: {
-  // 	fileType: 'transform',
-  // 	entryKeys(name) {
-  // 		return [name];
-  // 	},
-  // 	fallbackImport: '@ember-data/serializer/transform',
-  // },
-  component: {
-    fileType: ['component', 'template-only-component'],
-    needsTypeof: true,
-    entryKeys(name) {
-      const parts = name.split('/');
-      if (parts[parts.length - 1] === 'index') {
-        parts.pop();
-      }
-      const path = parts.join('/');
-      const named = parts.map((p) => camelize(p, { firstUpper: true })).join('::');
-      return [path, named];
-    },
-    // Assuming that classic ones are not glimmer
-    fallbackImport: '@ember/component',
-  },
-  // helper: {
-  //   fileType: "helper",
-  //   needsTypeof: true,
-  //   entryKeys(name) {
-  //     return [name];
-  //   },
-  // },
-  // modifier: {
-  //   fileType: "modifier",
-  //   needsTypeof: true,
-  //   entryKeys(name) {
-  //     return [name];
-  //   },
-  // },
   service: {
     fileType: 'service',
     entryKeys(name) {
