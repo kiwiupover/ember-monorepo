@@ -21,11 +21,11 @@
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
     "lint:types": "tsc --noEmit",
+    "dev": "concurrently 'npm:start:ember' 'npm:tailwind:watch' --names 'serve,styles'",
     "start": "concurrently 'npm:start:ember' 'npm:tailwind:watch' --names 'serve,styles'",
     "test": "concurrently \"pnpm:lint\" \"pnpm:test:*\" --names \"lint,test:\"",
     "test:ember": "ember test",
     "generate:type-registries": "pnpm node --experimental-strip-types ../../tools/type-registor/index.mjs",
-    "dev": "concurrently 'npm:start:ember' 'npm:tailwind:watch' --names 'serve,styles'",
     "tailwind:build": "npx tailwindcss -c ./tailwind.config.cjs -i ./app/styles/tailwind.css -o ./public/assets/tailwind.css",
     "tailwind:watch": "npx tailwindcss -c ./tailwind.config.cjs -i ./app/styles/tailwind.css -o ./public/assets/tailwind.css --watch",
     "start:ember": "ember serve"
@@ -131,5 +131,8 @@
   },
   "ember": {
     "edition": "octane"
+  },
+  "volta": {
+    "extends": "../../package.json"
   }
 }

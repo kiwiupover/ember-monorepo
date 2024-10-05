@@ -122,5 +122,8 @@
       "./components/menu.js": "./dist/_app_/components/menu.js",
       "./components/title.js": "./dist/_app_/components/title.js"
     }
+  },
+  "volta": {
+    "extends": "../../../package.json"
   }
 }

@@ -120,5 +120,8 @@
   },
   "dependencies": {
     "@repo/ui": "workspace:*"
+  },
+  "volta": {
+    "extends": "../../../package.json"
   }
 }
