@@ -5,7 +5,7 @@ const Glimmer = '@glimmer/';
 const EmberData = '@ember-data/';
 const WarpDrive = '@warp-drive/';
 
-const ProjectPackages = '(@repo|@repo/ui)';
+const ProjectPackages = '(@repo)';
 
 const sortGroups = [
   // Side effect imports.
