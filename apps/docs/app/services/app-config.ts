@@ -1,7 +1,7 @@
-import Service from '@ember/service';
+import { getOwner } from '@ember/application';
 import { assert } from '@ember/debug';
 import EngineInstance from '@ember/engine/instance';
-import { getOwner } from '@ember/application';
+import Service from '@ember/service';
 
 import config from '@repo/docs/config/environment';
 
