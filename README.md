@@ -36,7 +36,7 @@ This Turborepo includes the following packages and apps:
 - `@repo/prettier-config`: shared `prettier` configurations
 - `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
 
-Each package and app is 100% [TypeScript](https://www.typescriptlang.org/).
+Each package and app is 100% [TypeScript](https://www.typescriptlang.org/), [gts](https://github.com/ember-cli/ember-template-imports), and [Ember Route Templates](https://github.com/discourse/ember-route-template)
 
 ### Utilities
 
