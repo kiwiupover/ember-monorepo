@@ -75,6 +75,13 @@ export async function updateNewAddon(info: AddonInfo): Promise<void> {
     sourcefile: 'files/addon/.gitignore',
   });
 
+  await copyFile({
+    dirname: __dirname,
+    location: addonLocation,
+    fileName: 'jsconfig.json',
+    sourcefile: 'files/addon/jsconfig.json',
+  });
+
   await scopedCssVite(addonLocation);
 
   // Remove the existing prettier file from the addon

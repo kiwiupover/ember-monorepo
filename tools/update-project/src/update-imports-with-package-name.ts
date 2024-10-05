@@ -36,7 +36,7 @@ async function processDirectory(directory: string, packageName: string, depth: n
       if (entry.isDirectory()) {
         // Continue recursion
         await processDirectory(fullPath, packageName, depth + 1);
-      } else if (entry.isFile() && path.extname(entry.name) === '.gts') {
+      } else if (entry.isFile() && (path.extname(entry.name) === '.gts' || path.extname(entry.name) === '.json')) {
         try {
           const data = await fs.readFile(fullPath, 'utf8');
           const newPackageName = packageName.startsWith('@repo/') ? packageName : `@repo/${packageName}`;

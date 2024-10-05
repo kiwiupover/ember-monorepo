@@ -6,7 +6,7 @@ import { promises as fs } from 'node:fs';
 export async function deleteFile(file: string) {
   try {
     await fs.unlink(file);
-    console.log('File deleted successfully');
+    console.log('File deleted successfully,', file);
   } catch (err) {
     console.error('Error deleting the file:', err);
   }
