@@ -144,7 +144,6 @@ export async function updateNewAddon(info: AddonInfo): Promise<void> {
   );
 }
 
-//@ts-ignore
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 updateNewAddon.path = __dirname;

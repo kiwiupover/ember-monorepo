@@ -13,7 +13,7 @@ export async function generateAddon(info: AddonInfo) {
 
   console.log('Generating new addon');
 
-  const newAddon = await execa(
+  await execa(
     'npx',
     [
       'ember-cli@latest',

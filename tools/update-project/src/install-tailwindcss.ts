@@ -1,4 +1,4 @@
-import { packageJson, project, html } from 'ember-apply';
+import { packageJson, html } from 'ember-apply';
 import { copyFile } from './copy-config-files.ts';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -37,8 +37,8 @@ export async function installTailwindCss(location: string): Promise<void> {
   await copyFile({
     dirname: __dirname,
     location,
-    fileName: `.stylelintrc.js`,
-    sourcefile: 'files/tailwindcss/.stylelintrc.js',
+    fileName: `.stylelintrc.cjs`,
+    sourcefile: 'files/tailwindcss/.stylelintrc.cjs',
   });
 
   await html.insertText(`${location}/app/index.html`, {

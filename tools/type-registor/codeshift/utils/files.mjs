@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { globby } from 'globby';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -126,7 +127,8 @@ export function fileExists(file) {
       return true;
     }
     return false;
-  } catch (e) {
+  } catch (error) {
+    console.log({ error });
     return false;
   }
 }

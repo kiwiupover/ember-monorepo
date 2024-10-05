@@ -1,4 +1,4 @@
-/* eslint-disable no-shadow */
+ 
 
 import codeshift from 'jscodeshift';
 

@@ -154,6 +154,7 @@ export async function generateTypes() {
       output.push(
         ...Object.entries(entries)
           .sort(([aName], [bName]) => aName.localeCompare(bName))
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           .flatMap(([_, e]) => `	| ${e}`),
       );
       output[output.length - 1] = `${output[output.length - 1]};`;
@@ -164,6 +165,7 @@ export async function generateTypes() {
       output.push(
         ...Object.entries(entries)
           .sort(([aName], [bName]) => aName.localeCompare(bName))
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           .flatMap(([_, e]) => e),
       );
       output.push('}');

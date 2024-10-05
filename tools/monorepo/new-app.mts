@@ -16,7 +16,7 @@ export async function generateApp(info: AppInfo) {
 
   console.log('Generating new app');
 
-  const newApp = await execa(
+  await execa(
     'npx',
     [
       'ember-cli@latest',

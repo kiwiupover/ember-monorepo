@@ -1,0 +1,21 @@
+# Node.js
+node_modules/
+
+# Dependency directories
+.eslintcache
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# OS generated files
+.DS_Store
+
+# IDEs and editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

@@ -1,6 +1,5 @@
 import path from 'node:path';
 import url from 'node:url';
-import { promises as fs } from 'node:fs';
 
 import { scopedCssEmberCli } from './scoped-css.ts';
 import { copyFile } from './copy-config-files.ts';
@@ -17,26 +16,6 @@ export interface AppInfo {
 
 export async function updateNewApp(info: AppInfo): Promise<void> {
   const { appLocation, appName } = info;
-
-  // Update the new app
-
-  /*
-  TODO: How can I name the package.json name to `@repo/${name}`? but still
-  keep the original name in the ember-cli-build.
-
-
-  // Update the package.json name to `@repo/${name}`
-
-  const { name } = await packageJson.read(appLocation);
-
-  await packageJson.modify((packageJson) => {
-    if (name.startsWith('@repo/')) {
-      return;
-    }
-
-    packageJson.name = `@repo/${name}`;
-  }, appLocation);
-  */
 
   // update the package.json to include the new dependencies
   await packageJson.addDevDependencies(
@@ -90,7 +69,6 @@ export async function updateNewApp(info: AppInfo): Promise<void> {
   await updateImportPackageName(appLocation, appName);
 }
 
-// @ts-ignore
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 updateNewApp.path = __dirname;

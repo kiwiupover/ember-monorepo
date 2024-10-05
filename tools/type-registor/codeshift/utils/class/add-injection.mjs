@@ -1,4 +1,4 @@
-/* eslint-disable no-loop-func, no-shadow */
+ 
 import codeshift from 'jscodeshift';
 
 function isServiceDecorator(infos, decorator) {
