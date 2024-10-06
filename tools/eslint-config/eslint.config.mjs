@@ -1,7 +1,8 @@
 import globals from 'globals';
 import pluginJs from '@eslint/js';
 
-export default [
+/** @type {import('eslint').Linter.Config} */
+const config = [
   {
     files: ['**/*.cjs'],
     ignores: ['node_modules'],
@@ -16,3 +17,5 @@ export default [
   },
   pluginJs.configs.recommended,
 ];
+
+export default config;

@@ -257,27 +257,6 @@ importers:
       ember-welcome-page:
         specifier: ^7.0.2
         version: 7.0.2
-      eslint:
-        specifier: ^9.12.0
-        version: 9.12.0(jiti@1.21.6)
-      eslint-config-prettier:
-        specifier: ^9.1.0
-        version: 9.1.0(eslint@9.12.0(jiti@1.21.6))
-      eslint-plugin-ember:
-        specifier: ^12.2.1
-        version: 12.2.1(@babel/core@7.25.2)(@typescript-eslint/parser@8.8.0(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.2))(eslint@9.12.0(jiti@1.21.6))
-      eslint-plugin-n:
-        specifier: ^17.10.3
-        version: 17.10.3(eslint@9.12.0(jiti@1.21.6))
-      eslint-plugin-prettier:
-        specifier: ^5.2.1
-        version: 5.2.1(@types/eslint@8.56.12)(eslint-config-prettier@9.1.0(eslint@9.12.0(jiti@1.21.6)))(eslint@9.12.0(jiti@1.21.6))(prettier@3.3.3)
-      eslint-plugin-qunit:
-        specifier: ^8.1.2
-        version: 8.1.2(eslint@9.12.0(jiti@1.21.6))
-      eslint-plugin-simple-import-sort:
-        specifier: ^12.1.1
-        version: 12.1.1(eslint@9.12.0(jiti@1.21.6))
       loader.js:
         specifier: ^4.7.0
         version: 4.7.0
@@ -747,10 +726,6 @@ importers:
         version: 5.94.0
 
   tools/eslint-config:
-    dependencies:
-      typescript-eslint:
-        specifier: ^8.8.0
-        version: 8.8.0(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.2)
     devDependencies:
       '@babel/eslint-parser':
         specifier: ^7.25.7
@@ -758,6 +733,12 @@ importers:
       '@eslint/js':
         specifier: ^9.12.0
         version: 9.12.0
+      '@tsconfig/ember':
+        specifier: ^3.0.8
+        version: 3.0.8
+      '@types/eslint-config-prettier':
+        specifier: ^6.11.3
+        version: 6.11.3
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.8.0
         version: 8.8.0(@typescript-eslint/parser@8.8.0(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.2))(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.2)
@@ -788,6 +769,9 @@ importers:
       globals:
         specifier: ^15.10.0
         version: 15.10.0
+      typescript-eslint:
+        specifier: ^8.8.0
+        version: 8.8.0(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.2)
 
   tools/monorepo:
     dependencies:
@@ -2614,6 +2598,9 @@ packages:
 
   '@types/ember__utils@4.0.7':
     resolution: {integrity: sha512-qQPBeWRyIPigKnZ68POlkqI5e6XA78Q4G3xHo687wQTcEtfoL/iZyPC4hn70mdijcZq8Hjch2Y3E5yhsEMzK+g==}
+
+  '@types/eslint-config-prettier@6.11.3':
+    resolution: {integrity: sha512-3wXCiM8croUnhg9LdtZUJQwNcQYGWxxdOWDjPe1ykCqJFPVpzAKfs/2dgSoCtAvdPeaponcWPI7mPcGGp9dkKQ==}
 
   '@types/eslint@8.56.12':
     resolution: {integrity: sha512-03ruubjWyOHlmljCVoxSuNDdmfZDzsrrz0P2LeJsOXr+ZwFQ+0yQIwNCwt/GYhV7Z31fgtXJTAEs+FYlEL851g==}
@@ -5090,16 +5077,6 @@ packages:
 
   eslint-plugin-ember@12.2.0:
     resolution: {integrity: sha512-Pf0LB70qzrGqbxrieASFDqxvGu7/xgejM78Kj+VsH27XqkuoluF1M5fBU5xxNB7oRCpA5IFA5jdN9WnnSjLzKA==}
-    engines: {node: 18.* || 20.* || >= 21}
-    peerDependencies:
-      '@typescript-eslint/parser': '*'
-      eslint: '>= 8'
-    peerDependenciesMeta:
-      '@typescript-eslint/parser':
-        optional: true
-
-  eslint-plugin-ember@12.2.1:
-    resolution: {integrity: sha512-HZZueTKXmQRDVxREiMLdh87sLFmmkjH3z37gsS0pLWtnZECJiG447GCd+odVgWpSKoDpB4Hce0BtoJeY2HGSlg==}
     engines: {node: 18.* || 20.* || >= 21}
     peerDependencies:
       '@typescript-eslint/parser': '*'
@@ -12007,6 +11984,8 @@ snapshots:
       - '@babel/core'
       - supports-color
 
+  '@types/eslint-config-prettier@6.11.3': {}
+
   '@types/eslint@8.56.12':
     dependencies:
       '@types/estree': 1.0.6
@@ -15971,24 +15950,6 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
 
-  eslint-plugin-ember@12.2.1(@babel/core@7.25.2)(@typescript-eslint/parser@8.8.0(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.2))(eslint@9.12.0(jiti@1.21.6)):
-    dependencies:
-      '@ember-data/rfc395-data': 0.0.4
-      css-tree: 2.3.1
-      ember-eslint-parser: 0.5.1(@babel/core@7.25.2)(@typescript-eslint/parser@8.8.0(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.2))(eslint@9.12.0(jiti@1.21.6))
-      ember-rfc176-data: 0.3.18
-      eslint: 9.12.0(jiti@1.21.6)
-      eslint-utils: 3.0.0(eslint@9.12.0(jiti@1.21.6))
-      estraverse: 5.3.0
-      lodash.camelcase: 4.3.0
-      lodash.kebabcase: 4.1.1
-      requireindex: 1.2.0
-      snake-case: 3.0.4
-    optionalDependencies:
-      '@typescript-eslint/parser': 8.8.0(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.2)
-    transitivePeerDependencies:
-      - '@babel/core'
-
   eslint-plugin-es-x@7.8.0(eslint@8.57.0):
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
@@ -16108,16 +16069,6 @@ snapshots:
     optionalDependencies:
       '@types/eslint': 8.56.12
       eslint-config-prettier: 9.1.0(eslint@8.57.0)
-
-  eslint-plugin-prettier@5.2.1(@types/eslint@8.56.12)(eslint-config-prettier@9.1.0(eslint@9.12.0(jiti@1.21.6)))(eslint@9.12.0(jiti@1.21.6))(prettier@3.3.3):
-    dependencies:
-      eslint: 9.12.0(jiti@1.21.6)
-      prettier: 3.3.3
-      prettier-linter-helpers: 1.0.0
-      synckit: 0.9.1
-    optionalDependencies:
-      '@types/eslint': 8.56.12
-      eslint-config-prettier: 9.1.0(eslint@9.12.0(jiti@1.21.6))
 
   eslint-plugin-qunit@8.1.2(eslint@8.57.0):
     dependencies:

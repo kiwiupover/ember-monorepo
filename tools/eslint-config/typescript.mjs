@@ -4,11 +4,30 @@ import * as imports from './imports.mjs';
 import tseslint from 'typescript-eslint';
 import globals from 'globals';
 
-/** @returns {import('eslint').Linter.FlatConfig} */
+/**
+ * @typedef {Object} TsConfig
+ * @property {Object} [languageOptions]
+ * @property {Object} [plugins]
+ * @property {Object} [rules]
+ */
+
+/**
+ * @typedef {Object} Config
+ * @property {string[]} [files]
+ * @property {string[]} [srcDirs]
+ * @property {Record<string, any>} [globals]
+ * @property {Object} [rules]
+ */
+
+/**
+ * @param {Array<TsConfig>} configArray
+ * @returns {import('eslint').Linter.FlatConfig}
+ */
 function mergeTsConfigs(configArray) {
   const merged = {
     languageOptions: {},
     rules: {},
+    plugins: {},
   };
   for (const config of configArray) {
     merged.languageOptions = config.languageOptions ? config.languageOptions : merged.languageOptions;
@@ -19,6 +38,18 @@ function mergeTsConfigs(configArray) {
   return merged;
 }
 
+/**
+ * @typedef {Object} RulesConfig
+ * @property {boolean} [recommended]
+ * @property {boolean} [typeChecked]
+ * @property {boolean} [strict]
+ * @property {Object} [rules]
+ */
+
+/**
+ * @param {RulesConfig} config
+ * @returns {Object}
+ */
 export function rules(config = {}) {
   const ourRules = {
     '@typescript-eslint/no-invalid-void-type': 'off',
@@ -87,12 +118,20 @@ export function parser() {
   return merged.languageOptions.parser;
 }
 
+/**
+ * @returns {Record<string, any>}
+ */
 export function plugins() {
   return {
     '@typescript-eslint': tseslint.plugin,
   };
 }
 
+/**
+ * @param {string[]} srcDirs
+ * @param {string[]} files
+ * @returns {string[]}
+ */
 export function constructFileGlobs(srcDirs, files) {
   const globs = [];
 
@@ -107,7 +146,10 @@ export function constructFileGlobs(srcDirs, files) {
   return globs;
 }
 
-/** @returns {import('eslint').Linter.FlatConfig} */
+/**
+ * @param {Config} config
+ * @returns {import('eslint').Linter.FlatConfig}
+ */
 export function browser(config) {
   config.files = config.files ?? ['**/*.ts'];
   /** @type {string[]} */
@@ -131,12 +173,14 @@ export function browser(config) {
       globals: Object.assign({}, globals.browser, config.globals),
     },
     rules: Object.assign({}, js.rules(config), rules(config)),
-    // @ts-expect-error
     plugins: Object.assign({}, imports.plugins(), plugins()),
   };
 }
 
-/** @returns {import('eslint').Linter.FlatConfig} */
+/**
+ * @param {Config} config
+ * @returns {import('eslint').Linter.FlatConfig}
+ */
 export function node(config) {
   config.files = config.files ?? ['**/*.ts'];
   /** @type {string[]} */
@@ -160,7 +204,6 @@ export function node(config) {
       globals: Object.assign({}, globals.node, config.globals),
     },
     rules: Object.assign({}, js.rules(config), rules(config)),
-    // @ts-expect-error
     plugins: Object.assign({}, imports.plugins(), plugins()),
   };
 }

@@ -2,7 +2,18 @@
 import nodePlugin from 'eslint-plugin-n';
 import globals from 'globals';
 
-/** @returns {import('eslint').Linter.FlatConfig} */
+/**
+ * @typedef {Object} Config
+ * @property {string[]} [files]
+ * @property {string[]} [globals]
+ * @property {string[]} [parserOptions]
+ * @property {string[]} [rules]
+ */
+
+/**
+ * @returns {import('eslint').Linter.FlatConfig}
+ * @param {Config | undefined} [config]
+ */
 export function cjs(config) {
   const result = {
     files: [
@@ -64,7 +75,10 @@ export function cjs(config) {
   return finalConfig;
 }
 
-/** @returns {import('eslint').Linter.FlatConfig} */
+/**
+ * @returns {import('eslint').Linter.FlatConfig}
+ * @param {Config | undefined} [config]
+ */
 export function esm(config) {
   const result = {
     files: [
