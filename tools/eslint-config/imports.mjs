@@ -1,4 +1,6 @@
-/* eslint-disable no-useless-escape */
+import SimpleImportSortPlugin from 'eslint-plugin-simple-import-sort';
+import ImportPlugin from 'eslint-plugin-import';
+
 const Ember = '@ember/';
 const Glimmer = '@glimmer/';
 
@@ -21,10 +23,8 @@ export const sortGroups = [
   [`^${EmberData}`, `^${WarpDrive}`],
   // Potential Addons (Packages starting with ember-)
   [`^(@?ember-)`],
-
   // Project packages (engines / addons)
   [`^${ProjectPackages}`],
-
   // Absolute imports and other imports such as Vue-style `@/foo`.
   // Anything that does not start with a dot.
   ['^[^.]'],
@@ -32,3 +32,20 @@ export const sortGroups = [
   // Anything that starts with a dot.
   [`^\.`],
 ];
+
+export function rules() {
+  return {
+    // Imports
+    'import/first': 'error',
+    'import/newline-after-import': 'error',
+    'import/no-duplicates': 'error',
+    'simple-import-sort/imports': ['error', { groups: sortGroups }],
+  };
+}
+
+export function plugins() {
+  return {
+    'simple-import-sort': SimpleImportSortPlugin,
+    'import': ImportPlugin,
+  };
+}
