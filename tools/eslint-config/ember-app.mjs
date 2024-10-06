@@ -6,10 +6,10 @@ import * as gts from '@repo/eslint-config/gts.mjs';
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
-  // all ===============
+  // all ===
   globalIgnores(),
 
-  // browser (js/ts) ===============
+  // browser (js/ts) ===
   typescript.browser({
     srcDirs: ['app'],
   }),
@@ -19,9 +19,9 @@ export default [
     srcDirs: ['app'],
   }),
 
-  // node (module) ===============
+  // node (module) ===
   node.esm(),
 
-  // node (script) ===============
+  // node (script) ===
   node.cjs(),
 ];
