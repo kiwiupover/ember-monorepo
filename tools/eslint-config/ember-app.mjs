@@ -12,11 +12,13 @@ export default [
   // browser (js/ts) ===
   typescript.browser({
     srcDirs: ['app'],
+    allowedImports: [],
   }),
 
   // gts
   gts.browser({
     srcDirs: ['app'],
+    allowedImports: [],
   }),
 
   // node (module) ===

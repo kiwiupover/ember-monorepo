@@ -1,3 +1,3 @@
-import emberApp from '@repo/eslint-config/ember-app.mjs';
+import eslintConfigEmberApp from '@repo/eslint-config/ember-app.mjs';
 
-export default emberApp;
+export default eslintConfigEmberApp;
