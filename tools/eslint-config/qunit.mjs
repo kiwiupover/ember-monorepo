@@ -1,5 +1,5 @@
-import * as isolation from './isolation.js';
-import * as typescript from './typescript.js';
+import * as isolation from './isolation.mjs';
+import * as typescript from './typescript.mjs';
 import lintQUnit from 'eslint-plugin-qunit';
 
 const QUNIT_IMPORTS = ['@ember/test-helpers', '@ember/test-waiters', 'ember-qunit', 'qunit'];
@@ -24,7 +24,7 @@ export function plugins() {
   return { qunit: lintQUnit };
 }
 
-/** @returns {import('eslint').Linter.FlatConfig} */
+/** @returns {import('eslint').Linter.Config} */
 export function ember(config = {}) {
   config.allowedImports = Array.isArray(config.allowedImports)
     ? config.allowedImports.concat(QUNIT_IMPORTS)
@@ -41,7 +41,7 @@ export function ember(config = {}) {
   };
 }
 
-/** @returns {import('eslint').Linter.FlatConfig} */
+/** @returns {import('eslint').Linter.Config} */
 export function node(config = {}) {
   config.allowedImports = Array.isArray(config.allowedImports) ? config.allowedImports.concat(['qunit']) : ['qunit'];
 

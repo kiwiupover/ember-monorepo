@@ -1,22 +1,7 @@
-// @ts-check
 import nodePlugin from 'eslint-plugin-n';
 import globals from 'globals';
 
-import * as imports from './imports.mjs';
-
-/**
- * @typedef {Object} Config
- * @property {string[]} [files]
- * @property {string[]} [globals]
- * @property {string[]} [parserOptions]
- * @property {string[]} [rules]
- * @property {string[]} [plugins]
- */
-
-/**
- * @returns {import('eslint').Linter.FlatConfig}
- * @param {Config | undefined} [config]
- */
+/** @returns {import('eslint').Linter.Config} */
 export function cjs(config) {
   const result = {
     files: [
@@ -50,23 +35,33 @@ export function cjs(config) {
     sourceType: 'commonjs',
     /** @type {2022} */
     ecmaVersion: 2022,
-    // @ts-ignore
     globals: Object.assign({}, globals.node, finalConfig.languageOptions.globals, config?.globals ?? {}),
   });
   finalConfig.languageOptions.parserOptions = Object.assign({}, finalConfig.languageOptions.parserOptions, {
     ...(config?.parserOptions ?? {}),
   });
 
-  finalConfig.rules = Object.assign({}, finalConfig.rules, config?.rules ?? {});
+  finalConfig.rules = Object.assign(
+    {},
+    finalConfig.rules,
+    {
+      'n/no-missing-import': [
+        'error',
+        {
+          // this rule has a bug where if a package has never been published
+          // is generates a false report that its imports are missing
+          // it also has a bug where it doesn't properly follow exports in package.json
+          allowModules: ['@warp-drive/build-config', '@warp-drive/diagnostic'],
+        },
+      ],
+    },
+    config?.rules ?? {},
+  );
 
-  // @ts-ignore
   return finalConfig;
 }
 
-/**
- * @returns {import('eslint').Linter.FlatConfig}
- * @param {Config | undefined} [config]
- */
+/** @returns {import('eslint').Linter.Config} */
 export function esm(config) {
   const result = {
     files: ['addon-main.mjs', 'babel.config.mjs', 'eslint.config.mjs', 'rollup.config.mjs', 'testem.mjs'],
@@ -85,16 +80,27 @@ export function esm(config) {
     sourceType: 'module',
     /** @type {2022} */
     ecmaVersion: 2022,
-    // @ts-ignore
     globals: Object.assign({}, globals.nodeBuiltin, finalConfig.languageOptions.globals, config?.globals ?? {}),
   });
   finalConfig.languageOptions.parserOptions = Object.assign({}, finalConfig.languageOptions.parserOptions, {
     ...(config?.parserOptions ?? {}),
   });
 
-  finalConfig.rules = Object.assign({}, finalConfig.rules, config?.rules ?? {});
-  finalConfig.plugins = Object.assign({}, imports.plugins());
+  finalConfig.rules = Object.assign(
+    {},
+    finalConfig.rules,
+    {
+      'n/no-missing-import': [
+        'error',
+        {
+          // this rule has a bug where if a package has never been published
+          // is generates a false report that its imports are missing
+          allowModules: ['@warp-drive/build-config', '@warp-drive/diagnostic'],
+        },
+      ],
+    },
+    config?.rules ?? {},
+  );
 
-  // @ts-ignore
   return finalConfig;
 }

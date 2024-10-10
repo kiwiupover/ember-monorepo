@@ -21,7 +21,7 @@ import globals from 'globals';
 
 /**
  * @param {Array<TsConfig>} configArray
- * @returns {import('eslint').Linter.FlatConfig}
+ * @returns {import('eslint').Linter.Config}
  */
 function mergeTsConfigs(configArray) {
   const merged = {
@@ -148,7 +148,7 @@ export function constructFileGlobs(srcDirs, files) {
 
 /**
  * @param {Config} config
- * @returns {import('eslint').Linter.FlatConfig}
+ * @returns {import('eslint').Linter.Config}
  */
 export function browser(config) {
   config.files = config.files ?? ['**/*.ts'];
@@ -179,7 +179,7 @@ export function browser(config) {
 
 /**
  * @param {Config} config
- * @returns {import('eslint').Linter.FlatConfig}
+ * @returns {import('eslint').Linter.Config}
  */
 export function node(config) {
   config.files = config.files ?? ['**/*.ts'];

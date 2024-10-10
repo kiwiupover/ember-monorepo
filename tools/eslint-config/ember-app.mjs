@@ -4,7 +4,7 @@ import * as node from '@repo/eslint-config/node.mjs';
 import * as typescript from '@repo/eslint-config/typescript.mjs';
 import * as gts from '@repo/eslint-config/gts.mjs';
 
-/** @type {import('eslint').Linter.FlatConfig[]} */
+/** @type {import('eslint').Linter.Config[]} */
 export default [
   // all ===
   globalIgnores(),

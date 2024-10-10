@@ -37,7 +37,7 @@ export function rules(config = {}) {
 /**
  * @param {object} config
  * @param {string[]} [config.files]
- * @returns {import('eslint').Linter.FlatConfig}
+ * @returns {import('eslint').Linter.Config}
  */
 export function browser(config = {}) {
   config.files = Array.isArray(config.files) ? config.files : ['**/*.{js,gjs}'];
