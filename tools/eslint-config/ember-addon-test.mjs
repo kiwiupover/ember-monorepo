@@ -11,13 +11,13 @@ export default [
 
   // browser (js/ts) ===
   typescript.browser({
-    srcDirs: ['src'],
+    srcDirs: ['app'],
     allowedImports: [],
   }),
 
   // gts
   gts.browser({
-    srcDirs: ['src'],
+    srcDirs: ['app'],
     allowedImports: [],
   }),
 
@@ -29,7 +29,7 @@ export default [
 
   // Test Support ===
   qunit.ember({
-    files: ['src/test-support/**/*.{js,ts}'],
+    files: ['tests/**/*.{js,ts}'],
     allowedImports: [],
   }),
 ];
