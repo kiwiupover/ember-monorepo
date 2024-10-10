@@ -4,7 +4,7 @@ import Component from '@glimmer/component';
 
 import Title from '@repo/ui/components/title';
 
-export interface MenuSignature {
+export interface CardSignature {
   Element: HTMLDivElement;
   Args: {
     onClick?: (event: MouseEvent) => void;
@@ -14,12 +14,12 @@ export interface MenuSignature {
   };
 }
 
-export default class MenuComponent extends Component<MenuSignature> {
-  menuId = `${guidFor(this)}--menu`;
+export default class CardComponent extends Component<CardSignature> {
+  cardId = `${guidFor(this)}--card`;
 
   <template>
     <Title @title="Menu" />
-    <div class="Menu" role="menu" id={{this.menuId}} ...attributes>
+    <div class="Card" id={{this.cardId}} ...attributes>
       {{yield}}
     </div>
   </template>

@@ -1,5 +1,6 @@
-import Title from '@repo/docs/components/title';
 import RouteTemplate from 'ember-route-template';
+
+import Title from '@repo/docs/components/title';
 
 export default RouteTemplate(
   <template>

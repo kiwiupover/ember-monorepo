@@ -1,2 +1,1 @@
-export default interface Registry {
-}
+export default interface Registry {}

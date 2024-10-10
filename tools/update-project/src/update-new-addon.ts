@@ -39,10 +39,24 @@ export async function updateNewAddon(info: AddonInfo): Promise<void> {
       '@repo/typescript-config': 'workspace:*',
       '@glimmer/tracking': '^1.1.2',
       '@glimmer/component': '^1.1.2',
-      'eslint-plugin-ember': '^12.2.0',
       'ember-template-imports': '^4.1.1',
       'prettier-plugin-ember-template-tag': '^2.0.2',
     },
+    addonLocation,
+  );
+
+  await packageJson.removeDevDependencies(
+    [
+      '@typescript-eslint/eslint-plugin',
+      '@typescript-eslint/parser',
+      'eslint',
+      'eslint-config-prettier',
+      'eslint-plugin-ember',
+      'eslint-plugin-n',
+      'eslint-plugin-prettier',
+      'eslint-plugin-qunit',
+      'eslint-plugin-import',
+    ],
     addonLocation,
   );
 
@@ -64,8 +78,8 @@ export async function updateNewAddon(info: AddonInfo): Promise<void> {
   await copyFile({
     dirname: __dirname,
     location: addonLocation,
-    fileName: '.eslintrc.cjs',
-    sourcefile: 'files/addon/.eslintrc.cjs',
+    fileName: 'eslint.config.mjs',
+    sourcefile: 'files/addon/eslint.config.mjs',
   });
 
   await copyFile({
@@ -86,10 +100,25 @@ export async function updateNewAddon(info: AddonInfo): Promise<void> {
 
   // Remove the existing prettier file from the addon
   await deleteFile(path.join(addonLocation, '.prettierrc.cjs'));
+  await deleteFile(path.join(addonLocation, '.eslintrc.cjs'));
+  await deleteFile(path.join(addonLocation, '.eslintignore'));
 
+  // Remove the existing template registry file because we are using GTS template imports
+  await deleteFile(path.join(addonLocation, 'src/template-registry.ts'));
+
+  // Update imports with the new package name
   await updateImportPackageName(addonLocation, packageName);
 
   // Update the test app
+  await packageJson.modify((packageJson) => {
+    const { name } = packageJson;
+    if (name.startsWith('@repo/')) {
+      return;
+    }
+
+    packageJson.name = `@repo/${name}`;
+  }, testAppLocation);
+
   await scopedCssEmberCli(testAppLocation);
 
   // Add repo scoped dependencies to the test app
@@ -117,9 +146,9 @@ export async function updateNewAddon(info: AddonInfo): Promise<void> {
   // Add the new dependencies to the test app
   await packageJson.addDevDependencies(
     {
-      'eslint-plugin-ember': '^12.2.0',
       '@glimmer/component': '^1.1.2',
       '@glimmer/tracking': '^1.1.2',
+      '@repo/eslint-config': 'workspace:*',
       'ember-route-template': '^1.0.3',
       'ember-template-imports': '^4.1.1',
       'prettier-plugin-ember-template-tag': '^2.0.2',
@@ -127,16 +156,32 @@ export async function updateNewAddon(info: AddonInfo): Promise<void> {
     testAppLocation,
   );
 
+  await packageJson.removeDevDependencies(
+    [
+      '@typescript-eslint/eslint-plugin',
+      '@typescript-eslint/parser',
+      'eslint',
+      'eslint-config-prettier',
+      'eslint-plugin-ember',
+      'eslint-plugin-n',
+      'eslint-plugin-prettier',
+      'eslint-plugin-qunit',
+      'eslint-plugin-import',
+    ],
+    testAppLocation,
+  );
+
   // Copy the new eslint files to the test app
   await copyFile({
     dirname: __dirname,
     location: testAppLocation,
-    fileName: '.eslintrc.cjs',
-    sourcefile: 'files/addon-test/.eslintrc.cjs',
+    fileName: 'eslint.config.mjs',
+    sourcefile: 'files/addon-test/eslint.config.mjs',
   });
 
   // Remove the existing eslint and prettier files from the test app
   await deleteFile(path.join(testAppLocation, '.eslintrc.js'));
+  await deleteFile(path.join(testAppLocation, '.eslintignore'));
   await deleteFile(path.join(testAppLocation, '.prettierrc.js'));
 
   // Update imports with the new package name

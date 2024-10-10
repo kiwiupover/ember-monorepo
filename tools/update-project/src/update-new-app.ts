@@ -28,11 +28,25 @@ export async function updateNewApp(info: AppInfo): Promise<void> {
       '@babel/plugin-transform-private-methods': '7.25.4',
       '@babel/plugin-transform-typescript': '7.25.2',
       'ember-scoped-css': '0.21.4',
-      'eslint-plugin-ember': '^12.2.0',
       'ember-route-template': '^1.0.3',
       'ember-template-imports': '^4.1.1',
       'prettier-plugin-ember-template-tag': '^2.0.2',
     },
+    appLocation,
+  );
+
+  // Remove the existing eslint dependencies
+  await packageJson.removeDevDependencies(
+    [
+      '@typescript-eslint/eslint-plugin',
+      '@typescript-eslint/parser',
+      'eslint',
+      'eslint-config-prettier',
+      'eslint-plugin-ember',
+      'eslint-plugin-n',
+      'eslint-plugin-prettier',
+      'eslint-plugin-qunit',
+    ],
     appLocation,
   );
 
@@ -56,8 +70,8 @@ export async function updateNewApp(info: AppInfo): Promise<void> {
   await copyFile({
     dirname: __dirname,
     location: appLocation,
-    fileName: '.eslintrc.cjs',
-    sourcefile: 'files/app/.eslintrc.cjs',
+    fileName: 'eslint.config.mjs',
+    sourcefile: 'files/app/eslint.config.mjs',
   });
 
   // Remove the existing eslint and prettier files from the test app

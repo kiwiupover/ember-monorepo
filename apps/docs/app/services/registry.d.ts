@@ -6,6 +6,6 @@
 import type ServicesAppConfig from '@repo/docs/services/app-config';
 
 export default interface ProjectServiceRegistry {
-  'services/app-config': ServicesAppConfig;
-  'services/appConfig': ServicesAppConfig;
+	'services/app-config': ServicesAppConfig;
+	'services/appConfig': ServicesAppConfig;
 }
