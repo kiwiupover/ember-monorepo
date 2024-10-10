@@ -19,7 +19,6 @@ export function languageOptions() {
       babelOptions: {
         babelrc: false,
         configFile: false,
-        // eslint-disable-next-line n/no-unpublished-require
         plugins: [[resolve('@babel/plugin-proposal-decorators'), { legacy: true }]],
       },
     },

@@ -34,7 +34,7 @@ export function ember(config = {}) {
 
   const base = typescript.browser(config);
   return {
-    // languageOptions: base.languageOptions,
+    languageOptions: base.languageOptions,
     files: config.files,
     plugins: plugins(),
     rules: rules(config),

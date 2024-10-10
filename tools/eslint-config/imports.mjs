@@ -30,7 +30,7 @@ export const sortGroups = [
   ['^[^.]'],
   // Relative imports.
   // Anything that starts with a dot.
-  [`^\.`],
+  [`^.`],
 ];
 
 export function rules() {

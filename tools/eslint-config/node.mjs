@@ -2,12 +2,15 @@
 import nodePlugin from 'eslint-plugin-n';
 import globals from 'globals';
 
+import * as imports from './imports.mjs';
+
 /**
  * @typedef {Object} Config
  * @property {string[]} [files]
  * @property {string[]} [globals]
  * @property {string[]} [parserOptions]
  * @property {string[]} [rules]
+ * @property {string[]} [plugins]
  */
 
 /**
@@ -54,22 +57,7 @@ export function cjs(config) {
     ...(config?.parserOptions ?? {}),
   });
 
-  finalConfig.rules = Object.assign(
-    {},
-    finalConfig.rules,
-    {
-      'n/no-missing-import': [
-        'error',
-        {
-          // this rule has a bug where if a package has never been published
-          // is generates a false report that its imports are missing
-          // it also has a bug where it doesn't properly follow exports in package.json
-          allowModules: ['@warp-drive/build-config', '@warp-drive/diagnostic'],
-        },
-      ],
-    },
-    config?.rules ?? {},
-  );
+  finalConfig.rules = Object.assign({}, finalConfig.rules, config?.rules ?? {});
 
   // @ts-ignore
   return finalConfig;
@@ -81,17 +69,7 @@ export function cjs(config) {
  */
 export function esm(config) {
   const result = {
-    files: [
-      'addon-main.mjs',
-      'babel.config.mjs',
-      'diagnostic.js',
-      'diagnostic.mjs',
-      'eslint.config.mjs',
-      'holodeck.js',
-      'holodeck.mjs',
-      'rollup.config.mjs',
-      'testem.mjs',
-    ],
+    files: ['addon-main.mjs', 'babel.config.mjs', 'eslint.config.mjs', 'rollup.config.mjs', 'testem.mjs'],
   };
 
   if (config?.files) {
@@ -114,21 +92,8 @@ export function esm(config) {
     ...(config?.parserOptions ?? {}),
   });
 
-  finalConfig.rules = Object.assign(
-    {},
-    finalConfig.rules,
-    {
-      'n/no-missing-import': [
-        'error',
-        {
-          // this rule has a bug where if a package has never been published
-          // is generates a false report that its imports are missing
-          allowModules: ['@warp-drive/build-config', '@warp-drive/diagnostic'],
-        },
-      ],
-    },
-    config?.rules ?? {},
-  );
+  finalConfig.rules = Object.assign({}, finalConfig.rules, config?.rules ?? {});
+  finalConfig.plugins = Object.assign({}, imports.plugins());
 
   // @ts-ignore
   return finalConfig;
