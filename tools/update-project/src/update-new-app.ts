@@ -81,21 +81,21 @@ export async function updateNewApp(info: AppInfo): Promise<void> {
     dirname: __dirname,
     location: appLocation,
     fileName: '.stylelintrc.cjs',
-    sourcefile: 'files/app/stylelintrc.cjs',
+    sourcefile: 'files/app/.stylelintrc.cjs',
   });
 
   await copyFile({
     dirname: __dirname,
     location: appLocation,
     fileName: '.template-lintrc.cjs',
-    sourcefile: 'files/app/template-lintrc.cjs',
+    sourcefile: 'files/app/.template-lintrc.cjs',
   });
 
   // Remove the existing eslint and prettier files from the test app
   await deleteFile(path.join(appLocation, '.eslintrc.js'));
   await deleteFile(path.join(appLocation, '.prettierrc.js'));
-  await deleteFile(path.join(appLocation, '.stylelint.js'));
-  await deleteFile(path.join(appLocation, '.templatelintrc.js'));
+  await deleteFile(path.join(appLocation, '.stylelintrc.js'));
+  await deleteFile(path.join(appLocation, '.template-lintrc.js'));
 
   // Add the library watcher to the app
   await emberCliLibraryWatch(appLocation);
