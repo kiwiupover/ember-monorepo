@@ -2,11 +2,14 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-module.exports = function (defaults) {
+module.exports = async function (defaults) {
   let app = new EmberApp(defaults, {
     'ember-cli-babel': { enableTypeScriptTransform: true },
     'autoImport': {
       watchDependencies: ['ui'],
+    },
+    'trees': {
+      ...(await require('@repo/ember-cli/watch-dependencies.cjs').libraryWatcher(__dirname)),
     },
   });
 
