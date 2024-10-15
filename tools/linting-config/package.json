@@ -1,5 +1,5 @@
 {
-  "name": "@repo/prettier-config",
+  "name": "@repo/linting-config",
   "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",

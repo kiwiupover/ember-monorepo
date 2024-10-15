@@ -1,1 +1,1 @@
-module.exports = require("@repo/prettier-config/index.cjs");
+module.exports = require('@repo/linting-config/prettierrc.cjs');

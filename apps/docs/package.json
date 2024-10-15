@@ -51,7 +51,7 @@
     "@glint/template": "^1.4.0",
     "@repo/ember-cli": "workspace:*",
     "@repo/eslint-config": "workspace:*",
-    "@repo/prettier-config": "workspace:*",
+    "@repo/linting-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@tailwindcss/forms": "latest",
     "@tsconfig/ember": "^3.0.8",

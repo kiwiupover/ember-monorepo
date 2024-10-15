@@ -23,7 +23,7 @@ export async function updateNewApp(info: AppInfo): Promise<void> {
   await packageJson.addDevDependencies(
     {
       '@repo/eslint-config': 'workspace:*',
-      '@repo/prettier-config': 'workspace:*',
+      '@repo/linting-config': 'workspace:*',
       '@repo/typescript-config': 'workspace:*',
       '@babel/plugin-proposal-decorators': '7.24.7',
       '@babel/plugin-transform-class-properties': '7.25.4',

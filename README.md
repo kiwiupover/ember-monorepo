@@ -33,7 +33,7 @@ This Turborepo includes the following packages and apps:
 - `docs`: a vanilla [ember](https://emberjs.com) ts app
 - `@repo/ui`: an addon for a design-system as V2 addon
 - `@repo/eslint-config`: shared `eslint` configurations
-- `@repo/prettier-config`: shared `prettier` configurations
+- `@repo/linting-config`: shared `prettier` configurations
 - `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
 
 Each package and app is 100% [TypeScript](https://www.typescriptlang.org/), [gts](https://github.com/ember-cli/ember-template-imports) files, and [Ember Route Templates](https://github.com/discourse/ember-route-template) for `gts` route templates.

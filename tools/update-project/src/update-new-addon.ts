@@ -37,7 +37,7 @@ export async function updateNewAddon(info: AddonInfo): Promise<void> {
   await packageJson.addDevDependencies(
     {
       '@repo/eslint-config': 'workspace:*',
-      '@repo/prettier-config': 'workspace:*',
+      '@repo/linting-config': 'workspace:*',
       '@repo/typescript-config': 'workspace:*',
       '@glimmer/tracking': '^1.1.2',
       '@glimmer/component': '^1.1.2',
