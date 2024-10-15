@@ -19,6 +19,13 @@ export interface AppInfo {
 export async function updateNewApp(info: AppInfo): Promise<void> {
   const { appLocation, appName } = info;
 
+  await packageJson.addDependencies(
+    {
+      '@repo/ui': 'workspace:*',
+    },
+    appLocation,
+  );
+
   // update the package.json to include the new dependencies
   await packageJson.addDevDependencies(
     {
@@ -29,32 +36,19 @@ export async function updateNewApp(info: AppInfo): Promise<void> {
       '@babel/plugin-transform-class-properties': '7.25.4',
       '@babel/plugin-transform-private-methods': '7.25.4',
       '@babel/plugin-transform-typescript': '7.25.2',
+      '@typescript-eslint/eslint-plugin': '^8.8.1',
+      '@typescript-eslint/parser': '^8.8.1',
       'ember-scoped-css': '0.21.4',
       'ember-route-template': '^1.0.3',
       'ember-template-imports': '^4.1.1',
+      'eslint': '^9.12.0',
+      'eslint-config-prettier': '^9.1.0',
+      'eslint-plugin-ember': '^12.2.1',
+      'eslint-plugin-import': '^2.31.0',
+      'eslint-plugin-n': '^17.11.1',
+      'eslint-plugin-prettier': '^5.2.1',
       'prettier-plugin-ember-template-tag': '^2.0.2',
     },
-    appLocation,
-  );
-  await packageJson.addDependencies(
-    {
-      '@repo/ui': 'workspace:*',
-    },
-    appLocation,
-  );
-
-  // Remove the existing eslint dependencies
-  await packageJson.removeDevDependencies(
-    [
-      '@typescript-eslint/eslint-plugin',
-      '@typescript-eslint/parser',
-      'eslint',
-      'eslint-config-prettier',
-      'eslint-plugin-ember',
-      'eslint-plugin-n',
-      'eslint-plugin-prettier',
-      'eslint-plugin-qunit',
-    ],
     appLocation,
   );
 
@@ -83,14 +77,33 @@ export async function updateNewApp(info: AppInfo): Promise<void> {
     sourcefile: 'files/app/eslint.config.mjs',
   });
 
+  await copyFile({
+    dirname: __dirname,
+    location: appLocation,
+    fileName: '.stylelintrc.cjs',
+    sourcefile: 'files/app/stylelintrc.cjs',
+  });
+
+  await copyFile({
+    dirname: __dirname,
+    location: appLocation,
+    fileName: '.template-lintrc.cjs',
+    sourcefile: 'files/app/template-lintrc.cjs',
+  });
+
   // Remove the existing eslint and prettier files from the test app
   await deleteFile(path.join(appLocation, '.eslintrc.js'));
   await deleteFile(path.join(appLocation, '.prettierrc.js'));
+  await deleteFile(path.join(appLocation, '.stylelint.js'));
+  await deleteFile(path.join(appLocation, '.templatelintrc.js'));
 
+  // Add the library watcher to the app
   await emberCliLibraryWatch(appLocation);
 
+  // Add scoped css to the app
   await scopedCssEmberCli(appLocation);
 
+  // Update imports with the new package name
   await updateImportPackageName(appLocation, appName);
 
   // Add glint to the tsconfig

@@ -55,21 +55,6 @@ export async function updateNewAddon(info: AddonInfo): Promise<void> {
     addonLocation,
   );
 
-  await packageJson.removeDevDependencies(
-    [
-      // '@typescript-eslint/eslint-plugin',
-      // '@typescript-eslint/parser',
-      // 'eslint',
-      // 'eslint-config-prettier',
-      // 'eslint-plugin-ember',
-      // 'eslint-plugin-n',
-      // 'eslint-plugin-prettier',
-      // 'eslint-plugin-qunit',
-      // 'eslint-plugin-import',
-    ],
-    addonLocation,
-  );
-
   // Update addon with componet files that use `gts` files
   await files.applyFolder(path.join(__dirname, 'files/addon/components'), path.join(addonLocation, 'src/components'));
 
@@ -107,12 +92,28 @@ export async function updateNewAddon(info: AddonInfo): Promise<void> {
     sourcefile: 'files/addon/jsconfig.json',
   });
 
+  await copyFile({
+    dirname: __dirname,
+    location: addonLocation,
+    fileName: '.stylelintrc.cjs',
+    sourcefile: 'files/addon/.stylelintrc.cjs',
+  });
+
+  await copyFile({
+    dirname: __dirname,
+    location: addonLocation,
+    fileName: '.template-lintrc.cjs',
+    sourcefile: 'files/addon/.template-lintrc.cjs',
+  });
+
   await scopedCssVite(addonLocation);
 
   // Remove the existing prettier file from the addon
   await deleteFile(path.join(addonLocation, '.prettierrc.cjs'));
   await deleteFile(path.join(addonLocation, '.eslintrc.cjs'));
   await deleteFile(path.join(addonLocation, '.eslintignore'));
+  await deleteFile(path.join(addonLocation, '.stylelintrc.js'));
+  await deleteFile(path.join(addonLocation, '.templatelintrc.js'));
 
   // Remove the existing template registry file because we are using GTS template imports
   await deleteFile(path.join(addonLocation, 'src/template-registry.ts'));
@@ -168,21 +169,6 @@ export async function updateNewAddon(info: AddonInfo): Promise<void> {
       'eslint-plugin-prettier': '^5.2.1',
       'prettier-plugin-ember-template-tag': '^2.0.2',
     },
-    testAppLocation,
-  );
-
-  await packageJson.removeDevDependencies(
-    [
-      // '@typescript-eslint/eslint-plugin',
-      // '@typescript-eslint/parser',
-      // 'eslint',
-      // 'eslint-config-prettier',
-      // 'eslint-plugin-ember',
-      // 'eslint-plugin-n',
-      // 'eslint-plugin-prettier',
-      // 'eslint-plugin-qunit',
-      // 'eslint-plugin-import',
-    ],
     testAppLocation,
   );
 

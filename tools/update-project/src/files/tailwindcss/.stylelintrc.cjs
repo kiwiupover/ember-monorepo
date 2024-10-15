@@ -1,5 +1,1 @@
-'use strict';
-
-module.exports = {
-  extends: ['stylelint-config-tailwindcss', 'stylelint-prettier/recommended'],
-};
+module.exports = require('@repo/linting-config/stylelintrc.cjs');
