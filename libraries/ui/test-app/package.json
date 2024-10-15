@@ -24,7 +24,11 @@
     "start": "ember serve",
     "test": "concurrently \"pnpm:lint\" \"pnpm:test:*\" --names \"lint,test:\"",
     "test:ember": "ember test",
-    "dev": "ember serve --port=4444"
+    "dev": "ember serve --port=0"
+  },
+  "dependencies": {
+    "@repo/ui": "workspace:*",
+    "@repo/ember-cli": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -110,9 +114,6 @@
   },
   "ember": {
     "edition": "octane"
-  },
-  "dependencies": {
-    "@repo/ui": "workspace:*"
   },
   "volta": {
     "extends": "../../../package.json"

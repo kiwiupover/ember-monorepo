@@ -451,6 +451,9 @@ importers:
 
   libraries/ui/test-app:
     dependencies:
+      '@repo/ember-cli':
+        specifier: workspace:*
+        version: link:../../../tools/ember-cli
       '@repo/ui':
         specifier: workspace:*
         version: link:../package
