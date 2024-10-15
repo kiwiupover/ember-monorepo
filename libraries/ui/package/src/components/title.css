@@ -1,5 +1,7 @@
 .title {
   color: #c3570f;
-  border: 2px solid #c3570f;
-  border-radius: 0.5rem;
+  border: 1px solid #c3570f;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  font-size: 2rem;
 }

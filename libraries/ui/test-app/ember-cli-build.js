@@ -9,7 +9,7 @@ module.exports = async function (defaults) {
       watchDependencies: ['ui'],
     },
     'trees': {
-      ...(await require('@repo/ember-cli/watch-dependencies.cjs').watchDependencies(__dirname)),
+      ...(await require('@repo/ember-cli/watch-dependencies.cjs').libraryWatcher(__dirname)),
     },
   });
 
