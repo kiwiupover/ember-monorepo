@@ -48,6 +48,6 @@ This Turborepo has some additional tools already setup for you:
 - [StyleLint](https://stylelint.io/) for css linting
 - [Prettier](https://prettier.io) for code formatting
 
-## Thanks
+### Thanks
 
 Thank you [@wagenet](https://github.com/wagenet) and [NullVoxPopuli](https://github.com/NullVoxPopuli) for the inspritation behind this repo.
