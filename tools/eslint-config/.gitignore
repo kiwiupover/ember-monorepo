@@ -1,0 +1,31 @@
+# Node.js
+node_modules/
+
+# Dependency directories
+declarations/
+
+# Logs
+logs/
+*.log
+*.log.*
+
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# dotenv environment variables file
+.env
+
+# MacOS
+.DS_Store
+
+# Editor directories and files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

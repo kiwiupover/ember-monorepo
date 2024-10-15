@@ -1,0 +1,14 @@
+{
+  "name": "@repo/ember-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@pnpm/find-workspace-packages": "^6.0.9",
+    "package-up": "5.0.0",
+    "@embroider/broccoli-side-watch": "^1.0.1"
+  }
+}

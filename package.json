@@ -1,0 +1,37 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "concurrently 'pnpm:dev:*'",
+    "dev:turbo": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,js,hbs,gts,gjs,html,md}\"",
+    "new:app": "node --experimental-strip-types tools/monorepo/new-app.mts",
+    "new:addon": "node --experimental-strip-types tools/monorepo/new-addon.mts"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/prettier-config": "workspace:*",
+    "@tailwindcss/forms": "latest",
+    "concurrently": "^9.0.1",
+    "eslint": "^9.12.0",
+    "eslint-plugin-n": "^17.11.1",
+    "prettier": "^3.3.3",
+    "tailwindcss": "latest",
+    "turbo": "^2.1.3"
+  },
+  "packageManager": "pnpm@8.15.6",
+  "name": "project",
+  "engines": {
+    "node": "22.9.0",
+    "npm": "Use pnpm",
+    "yarn": "Use pnpm"
+  },
+  "volta": {
+    "node": "22.9.0",
+    "pnpm": "9.8.0"
+  },
+  "resolutions": {
+    "ember-eslint-parser": "^0.5.2"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@repo/REPLACE_WITH_PACKAGE_NAME/*": ["src/*"]
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**"]
+    },
+    "lint": {},
+    "start": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["generate:type-registries"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["generate:type-registries"]
+    },
+    "generate:type-registries": {
+      "inputs": ["package.json", "tsconfig.json", "app/services/**"]
+    }
+  }
+}
